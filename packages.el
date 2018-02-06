@@ -86,7 +86,10 @@ other-frame                 Use `switch-to-buffer-other-frame' to display calend
       (define-key cfw:calendar-mode-map "c" 'cfw:org-capture)
       (define-key cfw:calendar-mode-map "v" 'cfw:org-open-agenda-day))))
 
+(defun calendar/init-calfw-org ()
+  "Initialize calfw-org and add key-bindings"
   (use-package calfw-org
+    :defer t
     :init
     (spacemacs/set-leader-keys
       "agc" 'calendar/calfw-view)
