@@ -1,4 +1,4 @@
-;;; keybindings.el --- google-calendar Layer packages File for Spacemacs
+;;; keybindings.el --- calendar Layer packages File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
@@ -9,4 +9,4 @@
 ;;
 ;;; License: GPLv3
 
-(spacemacs/declare-prefix "ag" "google-calendar")
+(spacemacs/declare-prefix "ag" "calendar")

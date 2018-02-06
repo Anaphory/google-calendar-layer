@@ -3,16 +3,16 @@
 
 [[file:./img/gcal.png]]
 * Table of Contents                                        :TOC_4_gh:noexport:
- - [[#description][Description]]
- - [[#install][Install]]
- - [[#configuration][Configuration]]
-   - [[#configure-org-gcal][Configure org-gcal]]
-     - [[#create-credentials][Create credentials]]
-     - [[#setup-org-gcal][Setup org-gcal]]
-   - [[#configure-calfw][Configure calfw]]
-   - [[#configure-alert][Configure alert]]
-   - [[#schedule-events-with-org-capture][Schedule events with org-capture]]
- - [[#key-bindings][Key bindings]]
+- [[#description][Description]]
+- [[#install][Install]]
+- [[#configuration][Configuration]]
+  - [[#configure-org-gcal][Configure org-gcal]]
+    - [[#create-credentials][Create credentials]]
+    - [[#setup-org-gcal][Setup org-gcal]]
+  - [[#configure-calfw][Configure calfw]]
+  - [[#configure-alert][Configure alert]]
+  - [[#schedule-events-with-org-capture][Schedule events with org-capture]]
+- [[#key-bindings][Key bindings]]
 
 * Description
 This layer provides two-way Google calendar synchronization using the =org-gcal= package and a dedicated calendar view using =calfw= package.
@@ -22,10 +22,10 @@ Calendar events are synchronized to your computer by =org-gcal=. They are stored
 Your calendar events and TODOs (if you are an org user) can be viewed in either =org-agenda= or the dedicated calendar view provided by =calfw=. Calfw has daily, weekly and monthly calendar views and lets the user to easily create new events from the view itself.
 
 * Install
-To use google-calendar layer.
+To use calendar layer.
 
-1. =git clone https://github.com/mhkc/google-calendar-layer ~/.emacs.d/private/google-calendar=
-2. add it to your =~/.spacemacs=. You will need to add =google-calendar= to the existing =dotspacemacs-configuration-layers= list in this file.
+1. =git clone https://github.com/mhkc/calendar-layer ~/.emacs.d/private/google-calendar=
+2. add it to your =~/.spacemacs=. You will need to add =calendar= to the existing =dotspacemacs-configuration-layers= list in this file.
 
 * Configuration
 ** Configure org-gcal
@@ -87,7 +87,7 @@ You can also change which day the week begins with the following variable.
   (setq calendar-week-start-day 1) ; 0:Sunday, 1:Monday
 #+END_SRC
 
-In Calfw calendar view you can capture TODOs or events. To do so you need to bind a [[http://orgmode.org/manual/Capture-templates.html][org-capture template]] to the variable =cfw:org-capture-template=. The following are an example template for creating a calendar event that works with the =google-calendar/sync-cal-after-capture= function.
+[Omitted long line with 1 matches]
 #+NAME: org-event-schedule
 #+BEGIN_SRC emacs-lisp
      (setq cfw:org-capture-template '("s" "Scedule an event" entry
@@ -120,7 +120,7 @@ Depending on your taste and OS you might want to set different notification styl
 There are many ways to use this layer in conjunction with =org-agenda=, for instance you can capture tasks directly to the schedule org file for instance by using the template described [[org-event-schedule][above]].
 To automatically convert the newly to a calendar event you need to also add the following function to the =org-capture-after-finalize-hook=. The function checks if the capture entry is put in one of the calendar org files, and if so creates an calendar event of the file.
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'org-capture-after-finalize-hook 'google-calendar/sync-cal-after-capture)
+  (add-hook 'org-capture-after-finalize-hook 'calendar/sync-cal-after-capture)
 #+END_SRC
 
 For a calendar event to be considered valid by =org-gcal= it needs.

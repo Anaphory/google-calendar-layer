@@ -1,4 +1,4 @@
-;;; packages.el --- google-calendar layer packages file for Spacemacs.
+;;; packages.el --- calendar layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -11,11 +11,11 @@
 
 ;;; Commentary:
 
-(defconst google-calendar-packages
+(defconst calendar-packages
   '(org-gcal
     calfw))
 
-(defun google-calendar/init-org-gcal ()
+(defun calendar/init-org-gcal ()
   "Initializes org-gcal and adds keybindings for it's exposed functions"
   (use-package org-gcal
     :init
@@ -28,10 +28,10 @@
     (setq org-gcal-down-days 365)   ;; Set org-gcal to download events a year in advance
     (add-hook 'after-init-hook 'org-gcal-fetch)
     (add-hook 'kill-emacs-hook 'org-gcal-sync)
-    (add-hook 'org-capture-after-finalize-hook 'google-calendar/sync-cal-after-capture)
-    (run-with-idle-timer 600 t 'google-calendar/org-gcal-update)))
+    (add-hook 'org-capture-after-finalize-hook 'calendar/sync-cal-after-capture)
+    (run-with-idle-timer 600 t 'calendar/org-gcal-update)))
 
-(defun google-calendar/init-calfw ()
+(defun calendar/init-calfw ()
   "Initialize calfw"
 
   (use-package calfw
@@ -77,11 +77,11 @@ other-frame                 Use `switch-to-buffer-other-frame' to display calend
   (use-package calfw-org
     :init
     (spacemacs/set-leader-keys
-      "agc" 'google-calendar/calfw-view)
+      "agc" 'calendar/calfw-view)
     (spacemacs/declare-prefix "agc" "open-org-calendar")
 
     :config
-    (define-key cfw:org-schedule-map "q" 'google-calendar/calfw-restore-windows)
+    (define-key cfw:org-schedule-map "q" 'calendar/calfw-restore-windows)
 
     :commands
     (cfw:open-org-calendar)))

@@ -1,4 +1,4 @@
-;;; layers.el --- google-calendar Layer packages File for Spacemacs
+;;; layers.el --- calendar Layer packages File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
