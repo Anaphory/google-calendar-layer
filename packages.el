@@ -11,9 +11,12 @@
 
 ;;; Commentary:
 
-(defconst calendar-packages
-  '(org-gcal
-    calfw))
+(setq calendar-packages
+  '(
+    calfw
+    calfw-org
+    org-gcal
+    ))
 
 (defun calendar/init-org-gcal ()
   "Initializes org-gcal and adds keybindings for it's exposed functions"
