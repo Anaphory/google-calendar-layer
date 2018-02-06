@@ -38,7 +38,10 @@
   "Initialize calfw"
 
   (use-package calfw
+    :defer t
+    :commands (cfw:open-calendar-buffer)
     :init
+    (spacemacs/set-leader-keys "aC" 'cfw:open-calendar-buffer)
     (evil-set-initial-state 'cfw:calendar-mode 'normal)
     (defvar calfw-org-agenda-view "a"
       "Key for opening the current week or day view in org-agenda.")
@@ -71,11 +74,16 @@ other-frame                 Use `switch-to-buffer-other-frame' to display calend
               (const reorganize-frame)))
 
     :config
-    (evil-make-overriding-map cfw:calendar-mode-map)
-    (define-key cfw:calendar-mode-map "N" 'cfw:navi-next-month-command)
-    (define-key cfw:calendar-mode-map "P" 'cfw:navi-previous-month-command)
-    (define-key cfw:calendar-mode-map "c" 'cfw:org-capture)
-    (define-key cfw:calendar-mode-map "v" 'cfw:org-open-agenda-day))
+    (progn
+      (evil-make-overriding-map cfw:calendar-mode-map)
+      (define-key cfw:calendar-mode-map (kbd "SPC") 'spacemacs-cmds)
+      (define-key cfw:calendar-mode-map (kbd "TAB") 'cfw:show-details-command)
+      (define-key cfw:calendar-mode-map (kbd "C-j") 'cfw:navi-next-item-command)
+      (define-key cfw:calendar-mode-map (kbd "C-k") 'cfw:navi-prev-item-command)
+      (define-key cfw:calendar-mode-map "N" 'cfw:navi-next-month-command)
+      (define-key cfw:calendar-mode-map "P" 'cfw:navi-previous-month-command)
+      (define-key cfw:calendar-mode-map "c" 'cfw:org-capture)
+      (define-key cfw:calendar-mode-map "v" 'cfw:org-open-agenda-day))))
 
   (use-package calfw-org
     :init
