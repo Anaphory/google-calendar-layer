@@ -21,7 +21,6 @@
 (defun calendar/init-org-gcal ()
   "Initializes org-gcal and adds keybindings for it's exposed functions"
   (use-package org-gcal
-    :defer t
     :init
     (progn
       (spacemacs/set-leader-keys
