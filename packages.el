@@ -41,7 +41,7 @@
     :defer t
     :commands (cfw:open-calendar-buffer)
     :init
-    (spacemacs/set-leader-keys "aC" 'cfw:open-calendar-buffer)
+    (spacemacs/set-leader-keys "AC" 'cfw:open-calendar-buffer)
     (evil-set-initial-state 'cfw:calendar-mode 'normal)
     (defvar calfw-org-agenda-view "a"
       "Key for opening the current week or day view in org-agenda.")
