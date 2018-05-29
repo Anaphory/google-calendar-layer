@@ -3,16 +3,16 @@
 
 [[file:./img/gcal.png]]
 * Table of Contents                                        :TOC_4_gh:noexport:
- - [[#description][Description]]
- - [[#install][Install]]
- - [[#configuration][Configuration]]
-   - [[#configure-org-gcal][Configure org-gcal]]
-     - [[#create-credentials][Create credentials]]
-     - [[#setup-org-gcal][Setup org-gcal]]
-   - [[#configure-calfw][Configure calfw]]
-   - [[#configure-alert][Configure alert]]
-   - [[#schedule-events-with-org-capture][Schedule events with org-capture]]
- - [[#key-bindings][Key bindings]]
+- [[#description][Description]]
+- [[#install][Install]]
+- [[#configuration][Configuration]]
+  - [[#configure-org-gcal][Configure org-gcal]]
+    - [[#create-credentials][Create credentials]]
+    - [[#setup-org-gcal][Setup org-gcal]]
+  - [[#configure-calfw][Configure calfw]]
+  - [[#configure-alert][Configure alert]]
+  - [[#schedule-events-with-org-capture][Schedule events with org-capture]]
+- [[#key-bindings][Key bindings]]
 
 * Description
 This layer provides two-way Google calendar synchronization using the =org-gcal= package and a dedicated calendar view using =calfw= package.
@@ -52,10 +52,11 @@ Set the following variables with your Client ID and Secret.
 #+END_SRC
 
 You need to specify which calendar is going to be synchronized to which file. The variable =org-gcal-file-alist= expect a list where each element is an associated list containing a Calendar-ID and which file to synchronize to, [[org-gcal-cals][see example]]. If you want to synchronize multiple calendars its recommended to synchronize them with different files. This also enables the user to create events for a specific calendar. Currently =org-gcal= do not support synchronization of multiple Google accounts.
+Add the following config to =defun dotspacemacs/user-config ()= section in =.spacemacs= file.
 #+NAME: org-gcal-cals
 #+BEGIN_SRC emacs-lisp
-  (setq org-gcal-file-alist '(("your_first_calendar_id@gmail.com" . "/path/to/first_schedule_file.org")
-                              ("your_second_calendar_id@gmail.com" . "/path/to/second_schedule_file.org")))
+  (setq org-gcal-file-alist '(("your_first_calendar_id" . "/path/to/first_schedule_file.org")
+                              ("your_second_calendar_id" . "/path/to/second_schedule_file.org")))
 #+END_SRC
 
 You need to include the calendar event files in =org-agenda=, do so by adding the paths to the files to the =org-agenda-files= variable.
