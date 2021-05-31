@@ -1,4 +1,4 @@
-;;; keybindings.el --- google-calendar Layer packages File for Spacemacs
+;;; keybindings.el --- calendar Layer packages File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;

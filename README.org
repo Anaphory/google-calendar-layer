@@ -31,10 +31,10 @@ daily, weekly and monthly calendar views and lets the user to easily create new
 events from the view itself.
 
 * Install
-To use google-calendar layer.
+To use calendar layer.
 
-1. =git clone https://github.com/HanshenWang/google-calendar-layer ~/.emacs.d/private/google-calendar=
-2. add it to your =~/.spacemacs=. You will need to add =google-calendar= to the existing =dotspacemacs-configuration-layers= list in this file.
+1. =git clone https://github.com/Anaphory/google-calendar-layer ~/.emacs.d/private/google-calendar=
+2. add it to your =~/.spacemacs=. You will need to add =calendar= to the existing =dotspacemacs-configuration-layers= list in this file.
 
 * Configuration
 ** Configure org-gcal
@@ -200,6 +200,7 @@ In Calfw calendar view you can capture TODOs or events. To do so you need to
 bind a [[http://orgmode.org/manual/Capture-templates.html][org-capture template]] to the variable =cfw:org-capture-template=. The
 following is an example template for creating a calendar event that works with
 the =google-calendar/sync-cal-after-capture= function.
+
 #+NAME: org-event-schedule
 #+BEGIN_SRC emacs-lisp
   (setq cfw:org-capture-template '("a" "Set Appointment" entry (file  "path/to/a/schedule/file.org" )
@@ -223,7 +224,7 @@ also add the following function to the =org-capture-after-finalize-hook=. The
 function checks if the capture entry is put in one of the calendar org files,
 and if so creates an google calendar event of the file.
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'org-capture-after-finalize-hook 'google-calendar/sync-cal-after-capture)
+  (add-hook 'org-capture-after-finalize-hook 'calendar/sync-cal-after-capture)
 #+END_SRC
 
 For a calendar event to be considered valid by =org-gcal= it needs. For an

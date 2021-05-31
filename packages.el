@@ -1,4 +1,4 @@
-;;; packages.el --- google-calendar layer packages file for Spacemacs.
+;;; packages.el --- calendar layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2017 Sylvain Benner & Contributors
 ;;
@@ -16,7 +16,7 @@
     calfw
     calfw-org))
 
-(defun google-calendar/init-org-gcal ()
+(defun calendar/init-org-gcal ()
   "Initializes org-gcal and adds keybindings for it's exposed functions"
   (use-package org-gcal
     :init
@@ -28,14 +28,18 @@
     :config
     (add-hook 'after-init-hook 'org-gcal-fetch)
     (add-hook 'kill-emacs-hook 'org-gcal-sync)
-    (add-hook 'org-capture-after-finalize-hook 'google-calendar/sync-cal-after-capture)
-    (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))))
+    (add-hook 'org-capture-after-finalize-hook 'calendar/sync-cal-after-capture)
+    (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
+    (run-with-idle-timer 600 t 'calendar/org-gcal-update)))
 
-(defun google-calendar/init-calfw ()
+(defun calendar/init-calfw ()
   "Initialize calfw"
 
   (use-package calfw
+    :defer t
+    :commands (cfw:open-calendar-buffer)
     :init
+    (spacemacs/set-leader-keys "AC" 'cfw:open-calendar-buffer)
     (evil-set-initial-state 'cfw:calendar-mode 'normal)
     (defvar calfw-org-agenda-view "a"
       "Key for opening the current week or day view in org-agenda.")
@@ -68,24 +72,29 @@ other-frame                 Use `switch-to-buffer-other-frame' to display calend
               (const reorganize-frame)))
 
     :config
-    (evil-make-overriding-map cfw:calendar-mode-map)
-    (define-key cfw:calendar-mode-map "N" 'cfw:navi-next-month-command)
-    (define-key cfw:calendar-mode-map "P" 'cfw:navi-previous-month-command)
-    (define-key cfw:calendar-mode-map "c" 'cfw:org-capture)
-    (define-key cfw:calendar-mode-map "v" 'cfw:org-open-agenda-day)))
+    (progn
+      (evil-make-overriding-map cfw:calendar-mode-map)
+      (define-key cfw:calendar-mode-map (kbd "SPC") 'spacemacs-cmds)
+      (define-key cfw:calendar-mode-map (kbd "TAB") 'cfw:show-details-command)
+      (define-key cfw:calendar-mode-map (kbd "C-j") 'cfw:navi-next-item-command)
+      (define-key cfw:calendar-mode-map (kbd "C-k") 'cfw:navi-prev-item-command)
+      (define-key cfw:calendar-mode-map "N" 'cfw:navi-next-month-command)
+      (define-key cfw:calendar-mode-map "P" 'cfw:navi-previous-month-command)
+      (define-key cfw:calendar-mode-map "c" 'cfw:org-capture)
+      (define-key cfw:calendar-mode-map "v" 'cfw:org-open-agenda-day))))
 
-(defun google-calendar/init-calfw-org ()
-  "Initialize calfw-org"
-
+(defun calendar/init-calfw-org ()
+  "Initialize calfw-org and add key-bindings"
   (use-package calfw-org
+    :defer t
     :init
     (spacemacs/set-leader-keys
-      "aGc" 'google-calendar/calfw-view)
+      "aGc" 'calendar/calfw-view)
     (spacemacs/declare-prefix "aGc" "open-org-calendar")
     (add-hook 'cfw:calendar-mode-hook (lambda () (org-gcal-sync)))
 
     :config
-    (define-key cfw:org-schedule-map "q" 'google-calendar/calfw-restore-windows)
+    (define-key cfw:org-schedule-map "q" 'calendar/calfw-restore-windows)
 
     :commands
     (cfw:open-org-calendar)))
