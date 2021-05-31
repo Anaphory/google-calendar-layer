@@ -24,6 +24,9 @@
       (spacemacs/set-leader-keys
         "aGr" 'org-gcal-request-token
         "aGs" 'org-gcal-sync
+        "aGd" 'org-gcal-delete-at-point
+        "aGp" 'org-gcal-post-at-point
+        "aGx" 'google-calendar/delete-and-sync-all
         "aGf" 'org-gcal-fetch))
     :config
     (add-hook 'after-init-hook 'org-gcal-fetch)

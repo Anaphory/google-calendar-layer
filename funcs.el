@@ -13,10 +13,27 @@
   (defun calendar/org-gcal-update ()
     "Refresh OAuth token, fetch and sync calendar"
     (interactive)
-    (org-gcal-refresh-token)
     (org-gcal-fetch))
 
-  (defun calendar/sync-cal-after-capture ()
+  (defun calendar/delete-and-sync-all ()
+    " TEST"
+    (interactive)
+    (dolist (i org-gcal-file-alist)
+      (when (get-buffer (file-name-nondirectory (cdr i)))
+        (with-current-buffer (file-name-nondirectory (cdr i))
+          (erase-buffer)
+          (message "Earse buffered %s " (file-name-nondirectory (cdr i)))
+          )
+       )
+       ;; (if (cdr i)
+       ;;     (delete-file (cdr i))
+       ;;     (message "delete %s" (cdr i))
+       ;; )
+      )
+    (org-gcal-fetch)
+    )
+
+    (defun calendar/sync-cal-after-capture ()
     "Sync calendar after a event was added with org-capture.
 The function can be run automatically with the 'org-capture-after-finalize-hook'."
     (when-let ((cal-files (mapcar 'f-expand (mapcar 'cdr org-gcal-file-alist)))
@@ -25,6 +42,7 @@ The function can be run automatically with the 'org-capture-after-finalize-hook'
                (capture-target-isfile (eq (car (org-capture-get :target)) 'file))
                (capture-target-is-cal-file (member capture-target cal-files)))
       (org-gcal-sync)
+      ;; (org-gcal-refresh-token)
       (org-gcal-post-at-point))))
 
 (when (configuration-layer/package-usedp 'calfw)
