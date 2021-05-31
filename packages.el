@@ -12,9 +12,10 @@
 ;;; Commentary:
 
 (defconst google-calendar-packages
-  '(org-gcal
-    calfw
-    calfw-org))
+  '(calfw
+    calfw-org
+    org-gcal
+    alert))
 
 (defun calendar/init-org-gcal ()
   "Initializes org-gcal and adds keybindings for it's exposed functions"
@@ -90,6 +91,7 @@ other-frame                 Use `switch-to-buffer-other-frame' to display calend
   "Initialize calfw-org and add key-bindings"
   (use-package calfw-org
     :defer t
+    :commands (cfw:open-org-calendar)
     :init
     (spacemacs/set-leader-keys
       "aGc" 'calendar/calfw-view)
@@ -99,7 +101,8 @@ other-frame                 Use `switch-to-buffer-other-frame' to display calend
     :config
     (define-key cfw:org-schedule-map "q" 'calendar/calfw-restore-windows)
 
-    :commands
-    (cfw:open-org-calendar)))
-
+(defun google-calendar/init-alert ()
+  "Initialize alert"
+  (use-package alert
+    :defer t))
 ;;; packages.el ends here

@@ -130,13 +130,14 @@ The variable =org-gcal-file-alist= expect a list where each element is an
 associated list containing a Calendar-ID and which file to synchronize to, [[org-gcal-cals][see
 example]]. If you want to synchronize multiple calendars its recommended to
 synchronize them with different files. This also enables the user to create
-events for a specific calendar. Currently =org-gcal= does not support
-synchronization of multiple Google accounts.
+events for a specific calendar. Currently =org-gcal= do not support
+synchronization of multiple Google accounts. Add the following config to =defun
+dotspacemacs/user-config ()= section in =.spacemacs= file.
 
 #+NAME: org-gcal-cals
 #+BEGIN_SRC emacs-lisp
-  (setq org-gcal-file-alist '(("your_first_calendar_id@gmail.com" . "/path/to/first_schedule_file.org")
-                              ("your_second_calendar_id@gmail.com" . "/path/to/second_schedule_file.org")))
+  (setq org-gcal-file-alist '(("your_first_calendar_id" . "/path/to/first_schedule_file.org")
+                              ("your_second_calendar_id" . "/path/to/second_schedule_file.org")))
 #+END_SRC
 
 You need to include the calendar event files in =org-agenda=, do so by adding
