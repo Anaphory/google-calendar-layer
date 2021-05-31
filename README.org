@@ -225,7 +225,7 @@ also add the following function to the =org-capture-after-finalize-hook=. The
 function checks if the capture entry is put in one of the calendar org files,
 and if so creates an google calendar event of the file.
 #+BEGIN_SRC emacs-lisp
-  (add-hook 'org-capture-after-finalize-hook 'calendar/sync-cal-after-capture)
+  (add-hook 'org-capture-after-finalize-hook 'google-calendar/sync-cal-after-capture)
 #+END_SRC
 
 For a calendar event to be considered valid by =org-gcal= it needs. For an

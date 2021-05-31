@@ -17,7 +17,7 @@
     org-gcal
     alert))
 
-(defun calendar/init-org-gcal ()
+(defun google-calendar/init-org-gcal ()
   "Initializes org-gcal and adds keybindings for it's exposed functions"
   (use-package org-gcal
     :init
@@ -32,11 +32,11 @@
     :config
     (add-hook 'after-init-hook 'org-gcal-fetch)
     (add-hook 'kill-emacs-hook 'org-gcal-sync)
-    (add-hook 'org-capture-after-finalize-hook 'calendar/sync-cal-after-capture)
+    (add-hook 'org-capture-after-finalize-hook 'google-calendar/sync-cal-after-capture)
     (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
-    (run-with-idle-timer 600 t 'calendar/org-gcal-update)))
+    (run-with-idle-timer 600 t 'google-calendar/org-gcal-update)))
 
-(defun calendar/init-calfw ()
+(defun google-calendar/init-calfw ()
   "Initialize calfw"
 
   (use-package calfw
@@ -87,19 +87,19 @@ other-frame                 Use `switch-to-buffer-other-frame' to display calend
       (define-key cfw:calendar-mode-map "c" 'cfw:org-capture)
       (define-key cfw:calendar-mode-map "v" 'cfw:org-open-agenda-day))))
 
-(defun calendar/init-calfw-org ()
+(defun google-calendar/init-calfw-org ()
   "Initialize calfw-org and add key-bindings"
   (use-package calfw-org
     :defer t
     :commands (cfw:open-org-calendar)
     :init
     (spacemacs/set-leader-keys
-      "aGc" 'calendar/calfw-view)
+      "aGc" 'google-calendar/calfw-view)
     (spacemacs/declare-prefix "aGc" "open-org-calendar")
     (add-hook 'cfw:calendar-mode-hook (lambda () (org-gcal-sync)))
 
     :config
-    (define-key cfw:org-schedule-map "q" 'calendar/calfw-restore-windows)
+    (define-key cfw:org-schedule-map "q" 'google-calendar/calfw-restore-windows)
 
 (defun google-calendar/init-alert ()
   "Initialize alert"

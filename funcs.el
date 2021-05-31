@@ -10,13 +10,13 @@
 ;;; License: GPLv3
 
 (when (configuration-layer/package-usedp 'org-gcal)
-  (defun calendar/org-gcal-update ()
+  (defun google-calendar/org-gcal-update ()
     "Refresh OAuth token, fetch and sync calendar"
     (interactive)
     (org-gcal-fetch))
 
-  (defun calendar/delete-and-sync-all ()
-    " TEST"
+  (defun google-calendar/delete-and-sync-all ()
+    "..."
     (interactive)
     (dolist (i org-gcal-file-alist)
       (when (get-buffer (file-name-nondirectory (cdr i)))
@@ -33,7 +33,7 @@
     (org-gcal-fetch)
     )
 
-    (defun calendar/sync-cal-after-capture ()
+    (defun google-calendar/sync-cal-after-capture ()
     "Sync calendar after a event was added with org-capture.
 The function can be run automatically with the 'org-capture-after-finalize-hook'."
     (when-let ((cal-files (mapcar 'f-expand (mapcar 'cdr org-gcal-file-alist)))
@@ -46,22 +46,22 @@ The function can be run automatically with the 'org-capture-after-finalize-hook'
       (org-gcal-post-at-point))))
 
 (when (configuration-layer/package-usedp 'calfw)
-  (defun calendar/calfw-view ()
+  (defun google-calendar/calfw-view ()
     "Open calfw calendar view."
     (interactive)
     (let ((org-agenda-window-setup calfw-calendar-window-setup))
-      (calendar/calfw-prepare-window)
+      (google-calendar/calfw-prepare-window)
       ;;; If non nil, overload agenda window setup with the desired setup for calfw
       (org-agenda nil calfw-org-agenda-view)
       (cfw:open-org-calendar)))
 
-  (defun calendar/calfw-prepare-window ()
+  (defun google-calendar/calfw-prepare-window ()
     "Store current window layout in before opening calfw."
     (when-let ((is-not-cal-buffer (not (member (buffer-name) '("*cfw-calendar*" "*Org Agenda*"))))
                (is-not-conf (not (equal calfw-window-conf '(current-window-configuration)))))
       (setq calfw-window-conf (current-window-configuration))))
 
-  (defun calendar/calfw-restore-windows ()
+  (defun google-calendar/calfw-restore-windows ()
     "Bury current buffer and restore window layout."
     (interactive)
     (bury-buffer)
